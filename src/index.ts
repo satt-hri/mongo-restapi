@@ -24,9 +24,13 @@ server.listen(8080, () => {
   console.log('Server running on http://localhost:8080/');
 });
 
-const MONGO_URL = 'mongodb+srv://493678156qq:493678156qq@cluster0.kree9v7.mongodb.net/?retryWrites=true&w=majority'; // DB URI
+const MONGO_URL = 'mongodb+srv://493678156qq:493678156qq@cluster0.kree9v7.mongodb.net/?retryWrites=true&w=majority'; 
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error));
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');
+});
 
+app.use('/',router())
